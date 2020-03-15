@@ -1,11 +1,13 @@
 const db = require("../models");
-const mongo = require("mongojs");
+
+
+module.exports = function(app) {
 
 app.get("/api/workouts", (req, res) => {
     db.workout.find({})
       .then(dbWorkout => {
         res.json(dbWorkout);
-      })
+      }) 
       .catch(err => {
         res.json(err);
       });
@@ -22,9 +24,9 @@ app.get("/api/workouts", (req, res) => {
   });
   
   
-  app.post("/api/workout", ({ body }, res) => {
+  app.post("/api/workouts", ({ body }, res) => {
     db.workout.create(body)
-      .then(({ _id }) => db.workout.findOneAndUpdate({}, { $push: { exersizes: _id } }, { new: true }))
+      .then(({ _id }) => db.workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
       .then(dbWorkout => {
         res.json(dbWorkout);
       })
@@ -33,7 +35,7 @@ app.get("/api/workouts", (req, res) => {
       });
   });
   
-  app.put("/api/workout/:id", ({body}, res) => {
+  app.put("/api/workouts/:id", ({body}, res) => {
     // 
     db.workout.update({})
     .then(dbWorkout => {
@@ -43,12 +45,10 @@ app.get("/api/workouts", (req, res) => {
       res.json(err);
     });
 
-    //
+    
 
   });
   
-  // Start the server
-  app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}!`);
-  });
+
+};
   
