@@ -9,6 +9,12 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
+  app.get("/workout", function (req, res) {
+    // send to workout
+
+    res.sendFile(path.join(__dirname, "../public/workout.html"));
+  });
+
   app.get("/exercise", function (req, res) {
     // send to exercise
 

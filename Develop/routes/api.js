@@ -5,19 +5,19 @@ const mongojs = require("mongojs");
 module.exports = function(app) {
 
   app.get("/api/workouts", (req, res) => {
-    db.workout.find({})
-      .then(dbWorkout => {
-        res.json(dbWorkout);
+    db.Workout.find({})
+      .then(data => {
+        res.json(data);
       }) 
       .catch(err => {
         res.json(err);
       });
   });
   
-  app.post("/api/workouts", ({ body }, res) => {
-    db.workout.create(body)
-      .then(dbWorkout => {
-      res.json(dbWorkout);
+  app.post("/api/workouts", (req, res) => {
+    db.Workout.create({})
+      .then(data => {
+      res.json(data);
       })
       .catch(err => {
         res.json(err);
@@ -27,9 +27,11 @@ module.exports = function(app) {
  
 
   app.get("/api/workouts/range", (req, res) => {
-    db.workout.find({})
-      .then(dbWorkout => {
-        res.json(dbWorkout);
+    
+    db.Workout.find({})
+      .limit(7)
+      .then(data => {
+        res.json(data);
       })
       .catch(err => {
         res.json(err);
@@ -41,10 +43,10 @@ module.exports = function(app) {
   
   app.put("/api/workouts/:id", (req, res) => {
     // 
-    db.workout.update({_id: mongojs.ObjectId(req.params.id)}, { $push: { exercises: req.body }})
+    db.Workout.update({_id: mongojs.ObjectId(req.params.id)}, { $push: { exercises: req.body }})
 
-    .then(dbWorkout => {
-      res.json(dbWorkout);
+    .then(data => {
+      res.json(data);
     })
     .catch(err => {
       res.json(err);
