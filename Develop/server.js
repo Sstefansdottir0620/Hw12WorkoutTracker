@@ -24,6 +24,7 @@ app.use(express.json());
 require("./routes/api")(app);
 require("./routes/view")(app);
 
+//Create connection to mongoDB
 mongoose.connect("mongodb://localhost/workout",{
     useNewUrlParser:true,
     useFindAndModify:false
