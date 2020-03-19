@@ -7,6 +7,15 @@ module.exports = function(app) {
   app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
       .then(data => {
+        let newExercise = [];
+        data.forEach(workout => {
+          let totalDuration = workout.exercises.reduce((total, exercise) => {
+            return total + exercise.duration
+          });
+          workout.totalDuration = totalDuration
+          newExercise.push(workout)
+        });
+      
         res.json(data);
       }) 
       .catch(err => {
