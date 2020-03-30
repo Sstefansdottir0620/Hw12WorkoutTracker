@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 const app = express();
 
@@ -25,7 +25,7 @@ require("./routes/api")(app);
 require("./routes/view")(app);
 
 //Create connection to mongoDB
-mongoose.connect("mongodb://localhost/workout",{
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/workout",{
     useNewUrlParser:true,
     useFindAndModify:false
 

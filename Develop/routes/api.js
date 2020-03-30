@@ -5,8 +5,10 @@ const mongojs = require("mongojs");
 module.exports = function(app) {
 
   app.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
+    db.Workout.find()
       .then(data => {
+        console.log(data);
+        res.json(data);
         let newExercise = [];
         data.forEach(workout => {
           let totalDuration = workout.exercises.reduce((total, exercise) => {
@@ -16,7 +18,7 @@ module.exports = function(app) {
           newExercise.push(workout)
         });
       
-        res.json(data);
+        
       }) 
       .catch(err => {
         res.json(err);
@@ -46,6 +48,7 @@ module.exports = function(app) {
         res.json(err);
       });
   });
+
   
   
   
