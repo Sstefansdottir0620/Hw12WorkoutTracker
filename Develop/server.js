@@ -25,7 +25,7 @@ require("./routes/api")(app);
 require("./routes/view")(app);
 
 //Create connection to mongoDB
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/workout",{
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout",{
     useNewUrlParser:true,
     useFindAndModify:false
 
